@@ -21,6 +21,12 @@
 
                     {{ date("Y-m-d | h:i a") }}
 
+                        <br>
+                        <br>
+                        <br>
+
+                    {{ Str::slug('Min Ga Lar Par'. '-'.uniqid()) }}
+
                 </div>
             </div>
         </div>
