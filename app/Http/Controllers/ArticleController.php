@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Article;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class ArticleController extends Controller
 {
@@ -15,6 +16,12 @@ class ArticleController extends Controller
      */
     public function index()
     {
+//        $all = Article::all();
+//        foreach($all as $a){
+//            $a->slug = Str::slug($a->title.'-'.uniqid());
+//            $a->update();
+//        }
+
         $articles = Article::when(isset(request()->search),function ($q){
             $search = request()->search;
             $q->orwhere("title","like","%$search%")->orwhere("description","like","%$search%");
@@ -48,6 +55,7 @@ class ArticleController extends Controller
 
         $article = new Article();
         $article->title = $request->title;
+        $article->slug = Str::slug($request->title.'-'.uniqid());
         $article->description = $request->description;
         $article->category_id = $request->category;
         $article->user_id = Auth::id();
@@ -94,6 +102,7 @@ class ArticleController extends Controller
         ]);
 
         $article->title = $request->title;
+        $article->slug = Str::slug($request->title.'-'.uniqid());
         $article->description = $request->description;
         $article->category_id = $request->category;
 
