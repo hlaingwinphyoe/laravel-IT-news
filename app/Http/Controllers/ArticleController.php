@@ -101,8 +101,12 @@ class ArticleController extends Controller
             "description" => "required|min:5",
         ]);
 
+        // title ချိန်းမှ slug ပြောင်း
+        if ($article->title != $request->title){
+            $article->slug = Str::slug($request->title.'-'.uniqid());
+        }
+
         $article->title = $request->title;
-        $article->slug = Str::slug($request->title.'-'.uniqid());
         $article->description = $request->description;
         $article->category_id = $request->category;
 
