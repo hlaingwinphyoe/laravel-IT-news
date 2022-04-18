@@ -16,7 +16,8 @@
 
                     <div class="text-black-50 the-excerpt">
                         <p>
-                            {{ Str::words($article->description,50) }}
+{{--                            {{ Str::words($article->description,50) }}--}}
+                            {{ $article->excerpt }}
                         </p>
                     </div>
 
